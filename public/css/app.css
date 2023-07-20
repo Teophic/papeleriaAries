@@ -1,0 +1,49 @@
+.background-nav{
+    background-color: #884A39;
+
+}
+.background-button-nav{
+    background-color: #F3E9DD;
+}
+.background-inner-nav{
+    background-color: #AA8B56;
+}
+.background-offcanva-nav-text{
+    color: #884A39;
+    font-weight: bold;
+}
+.background-inner-offcanva-nav-text{
+    color: #884A39;
+}
+
+
+.background-body{
+    background-color: #A4907C;
+}
+.button-body-color{
+    background-color: #AA8B56;
+    color: black;
+}
+.button-body-color:hover{
+    background-color: #884A39;
+    
+}
+
+.table-color{
+    background-color: #884A39;
+}
+.table-text-color{
+    color: #A4907C;
+}
+.button-color{
+    width: auto;
+    height: auto;
+    background-color: #A4907C;
+    color: #884A39;
+}
+.button-color:hover{
+    width: auto;
+    height: auto;
+    background-color: #A4907C;
+    color: black;
+}
