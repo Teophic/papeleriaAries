@@ -13,33 +13,20 @@
 <body class="background-body" >
     <!--text-bg-dark  data-bs-theme="dark"-->
     <header>
-        <nav class="navbar sticky-top background-nav" >
+        <nav class="navbar sticky-top background-nav navbar-expand-lg " >
             <div class="container-fluid align-items-center">
-                <a class="navbar-brand " href="{{URL::to('/')}}" style="width:100px;height:100px;border-radius: 50%"><img src="{{asset('img\logo.png') }}" class="" alt="Logo" style="width:100px;height:100px"></a>
-                    <button class="navbar-toggler background-button-nav" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="offcanvas offcanvas-end background-inner-nav" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-                    <div class="offcanvas-header">
-                        <h5 class="offcanvas-title background-offcanva-nav-text" style="font-size: 25px;" id="offcanvasNavbarLabel">Menu</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                    </div>
-                    <div class="offcanvas-body ">
-                        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3 ">
-                            <li class="nav-item">
-                                <a class="nav-link background-offcanva-nav-text" aria-current="page" href="{{URL::to('/')}}">Home</a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle background-offcanva-nav-text" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Inventario</a>
-                                <ul class="dropdown-menu background-inner-nav ">
-                                    <li ><a class="nav-link " href="{{URL::to('Agregar')}}">Agregar Producto</a></li>
-                                    <li><a class="nav-link" href="{{URL::to('Stock')}}">Buscar</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+                    <a class="navbar-brand " href="{{URL::to('/')}}" style="width:100px;height:100px;border-radius: 50%">
+                        <img src="{{asset('img\logo.png') }}" class="" alt="Logo" style="width:100px;height:100px">
+                    </a>
+
+                <div class="collapse navbar-collapse justify-content-end" id="">
+                    <ul class=" navbar-nav  nav-fill">
+                        <li class="nav-item"><a class="nav-link  text-color" href="{{URL::to('Agregar')}}">Agregar Producto</a></li>
+                        <li class="nav-item"><a class="nav-link text-color" href="{{URL::to('Stock')}}">Buscar</a></li> 
+                    </ul>
             </div>
+            </div>
+            
         </nav>
     </header>
     @include('sweetalert::alert')

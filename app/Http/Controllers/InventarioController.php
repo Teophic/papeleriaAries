@@ -41,14 +41,15 @@ class InventarioController extends Controller
 
      public function search(Request $request,){
         $busqueda = $request->get('busqueda');
-
+        if($busqueda){
         $resultados = inventario::where('id' ,'=',$busqueda)
         ->orWhere('nombre' ,'LIKE',"%$busqueda%")
         ->orWhere('marca' ,'LIKE',"%$busqueda%")
         ->orWhere('stock' ,'=',$busqueda)
         -> get();
-       
         return view('Menus.stock', compact('resultados'));
+         }
+        return view('Menus.stock');
      }
 
      

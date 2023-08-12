@@ -27,7 +27,7 @@
                 @enderror
                 <div class="mb-3">
                     <label for="id" class="form-label">Codigo</label>
-                    <input type="number" min="0" name="id" class="form-control">
+                    <input type="number" min="0" name="id" class="form-control" autofocus>
                 </div>
                 <div class="mb-3">
                     <label for="nombre" class="form-label">Nombre</label>

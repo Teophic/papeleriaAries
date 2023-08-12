@@ -8,7 +8,7 @@
                 
                 <div class="mb-3">
                     <label for="id" class="form-label">Busqueda</label>
-                    <input type="text" name="busqueda"   class="form-control">
+                    <input type="text" name="busqueda"   class="form-control" autofocus>
                 </div><!--
                 <select name="campo" class="form-select" aria-label="Default select example">
                     <option selected>Tipo de busqueda</option>

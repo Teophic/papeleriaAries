@@ -8,7 +8,7 @@
             @csrf
             <div class="mb-3">
                 <label for="id" class="form-label">Código</label>
-                <input type="number" name="id" id="id" class="form-control" placeholder="123456789">
+                <input type="number" name="id" id="id" class="form-control" placeholder="123456789" autofocus>
             </div>
             <div class="mb-3">
                 <label for="cantidad" class="form-label">Cantidad</label>
@@ -22,13 +22,14 @@
             <button type="submit" class="btn button-body-color">Info costo total</button>
         </form>
 
-        <form action="{{ route('removeProduct') }}" method="POST" class="mt-3">
+        <form action="{{ route('removeProduct') }}" method="POST" class="mt-1">
             @method("DELETE")
             @csrf
-            
+            <label for="pago" class="form-label">Pago con: </label>
+            <input type="number" name="pago" id="pago" min="0" class="form-control">
             <!--<label for="total" class="form-label mt-3">Total</label>
                 <input type="number" name="total" id="total" value="{{ session('total', 0) }}" disabled class="from-control">-->
-            <button type="submit" class="btn button-body-color">Pagar</button>
+            <button type="submit" class="btn button-body-color mt-2">Pagar</button>
         </form>
     </div>
     <div class="table-responsive p-4 w-75 align-self-center">

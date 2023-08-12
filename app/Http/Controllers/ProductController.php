@@ -67,7 +67,7 @@ class ProductController extends Controller
      }
 
      //Funcion para remover la tabla actual que se usa en la lista de compra
-     public function removeStock()
+     public function removeStock(Request $request)
      {
         $data = TemporaryTable::all();
 
@@ -78,8 +78,16 @@ class ProductController extends Controller
             
         }
 
+        $subtotal = 0;
+        foreach ($data as $producto) {
+            $subtotal += $producto->precio * $producto->cantidad;
+        }
+
+
+        $total = $request->pago - $subtotal;
+
         TemporaryTable::truncate();
-        Alert::success('Gracias por su compra');
+        Alert::success('Gracias por su compra','Su cambio es: '.$total);
         
         
 
