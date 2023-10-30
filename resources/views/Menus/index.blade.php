@@ -14,23 +14,24 @@
                 <label for="cantidad" class="form-label">Cantidad</label>
                 <input type="number" name="cantidad" id="cantidad" min="1" value="1" class="form-control">
             </div>
-            <button type="submit" class="btn button-body-color">Agregar a compra</button>
+            <button type="submit" class="btn button-body-color mb-1">Agregar a compra</button>
+            <div class="mt-2"><label class="" for=""><b>Total a pagar: {{ session('total')}}</b></label></div>
+            
+            
         </form>
-
-        <form action="{{ route('infoPago') }}" method="GET" class="mt-3">
+        <!--<form action="{{ route('infoPago') }}" method="GET" class="mt-3">
             @csrf
             <button type="submit" class="btn button-body-color">Info costo total</button>
-        </form>
-
+        </form>-->
+        
         <form action="{{ route('removeProduct') }}" method="POST" class="mt-1">
             @method("DELETE")
             @csrf
-            <label for="pago" class="form-label">Pago con: </label>
+            <label for="pago" class="form-label mt-3">Pago con: </label>
             <input type="number" name="pago" id="pago" min="0" class="form-control">
-            <!--<label for="total" class="form-label mt-3">Total</label>
-                <input type="number" name="total" id="total" value="{{ session('total', 0) }}" disabled class="from-control">-->
             <button type="submit" class="btn button-body-color mt-2">Pagar</button>
         </form>
+
     </div>
     <div class="table-responsive p-4 w-75 align-self-center">
         <div class="table-wrapper-scroll-y my-custom-scrollbar" style="position: relative;height:950px;overflow-y: auto;display: block;overflow-x: hidden;">
@@ -41,6 +42,7 @@
                         <th class="th-sm" scope="col">Nombre</th>
                         <th class="th-sm" scope="col">Precio</th>
                         <th class="th-sm" scope="col">Cantidad</th>
+                        <th class="th-sm" scope="col">Subtotal</th>
                         <th class="th-sm" scope="col">#</th>
                     </tr>
                 </thead>
@@ -48,11 +50,12 @@
                     @if(isset($productos) && !$productos->isEmpty())
                         @foreach ($productos as $producto )  
                             <tr class="table-text-color">
-                                <td>{{ $producto->id }}</td>
+                                <td>{{ $producto->n }}</td>
                                 <td>{{ $producto->nombre }}</td>
                                 <td>{{ $producto->precio }}</td>
                                 <td>{{ $producto->cantidad }}</td>
-                                <td><form action="{{ route('deleteProduct', [$producto->id]) }}" method="POST">
+                                <td>{{ $producto->cantidad * $producto->precio }}</td>
+                                <td><form action="{{ route('deleteProduct', [$producto->n]) }}" method="POST">
                                         @method('DELETE')
                                         @csrf
                                         <button class="btn button-color btn-sm">Eliminar</button>

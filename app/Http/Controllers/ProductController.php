@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 use App\Models\inventario;
 use App\Models\TemporaryTable;
@@ -11,6 +12,7 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class ProductController extends Controller
 {
+    
     public function showProducts()
     {
         $productos = TemporaryTable::all();
@@ -41,17 +43,6 @@ class ProductController extends Controller
 
         $producto->save();
     
-        
-
-        
-       
-        return redirect()->route('productos')->with([
-            'success' => 'Producto agregado correctamente.',
-        ]);
-     }
-
-     public function infoPago(){
-
         $productos = TemporaryTable::all();
 
         $subtotal = 0;
@@ -60,21 +51,20 @@ class ProductController extends Controller
         }
 
         $total = $subtotal;
-       
-        Alert::info('Total', 'El total a pagar es: '.$total);
-
-        return redirect()->route('productos');
+        return redirect()->route('productos')->with('total',$total);
      }
+
 
      //Funcion para remover la tabla actual que se usa en la lista de compra
      public function removeStock(Request $request)
      {
         $data = TemporaryTable::all();
 
+        
+
         foreach($data as $key){
             $cantidad = $key->cantidad;
-            inventario::where('id', $key->id)->decrement('stock', $cantidad);
-            $test = inventario::where('id', $key->id)->get();
+            inventario::where('id', $key->id)->decrement('stock', $cantidad);;
             
         }
 
@@ -87,6 +77,7 @@ class ProductController extends Controller
         $total = $request->pago - $subtotal;
 
         TemporaryTable::truncate();
+        DB::statement('update temporary_tables set n=0');
         Alert::success('Gracias por su compra','Su cambio es: '.$total);
         
         
@@ -98,17 +89,9 @@ class ProductController extends Controller
     public function destroy($id){
 
 
-        $producto = TemporaryTable::find($id);
-
-        if (!$producto) {
-            // El producto no existe, puedes mostrar un mensaje de error o redirigir a otra página
-            
-            return redirect()->back()->with('error', 'No hay nada que pagar');
-        }
-
+        $producto = TemporaryTable::where('n', $id);
         
         $producto -> delete();
-
         return redirect()->route('productos');
      }
 }
