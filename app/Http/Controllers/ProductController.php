@@ -12,17 +12,17 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class ProductController extends Controller
 {
-    
+
     public function showProducts()
     {
         $productos = TemporaryTable::all();
-        
-        
+
+
         return view('Menus.index', compact('productos'));
     }
 
     public function addProduct(Request $request){
-      
+
         $request->validate([
             'id' => 'required',
             'cantidad' => 'required',
@@ -42,7 +42,7 @@ class ProductController extends Controller
         $producto ->cantidad = $request->cantidad;
 
         $producto->save();
-    
+
         $productos = TemporaryTable::all();
 
         $subtotal = 0;
@@ -60,12 +60,12 @@ class ProductController extends Controller
      {
         $data = TemporaryTable::all();
 
-        
+
 
         foreach($data as $key){
             $cantidad = $key->cantidad;
             inventario::where('id', $key->id)->decrement('stock', $cantidad);;
-            
+
         }
 
         $subtotal = 0;
@@ -79,8 +79,8 @@ class ProductController extends Controller
         TemporaryTable::truncate();
         DB::statement('update temporary_tables set n=0');
         Alert::success('Gracias por su compra','Su cambio es: '.$total);
-        
-        
+
+
 
         return redirect()->route('productos');
      }
@@ -90,8 +90,17 @@ class ProductController extends Controller
 
 
         $producto = TemporaryTable::where('n', $id);
-        
+
         $producto -> delete();
-        return redirect()->route('productos');
+
+        $productos = TemporaryTable::all();
+
+        $subtotal = 0;
+        foreach ($productos as $producto) {
+            $subtotal += $producto->precio * $producto->cantidad;
+        }
+
+        $total = $subtotal;
+        return redirect()->route('productos')->with('total',$total);
      }
 }

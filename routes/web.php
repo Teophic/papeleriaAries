@@ -46,6 +46,8 @@ Route::delete('/Stock/{id}', [InventarioController::class, 'destroy'])->name('de
 
 Route::get('/Stock', [InventarioController::class, 'search'])->name('search');
 
+Route::post('/Stock/temp', [InventarioController::class, 'storeTemp'])->name('saveT');
+
 
 Route::post('/', [ProductController::class, 'addProduct'])->name('addProduct');
 
