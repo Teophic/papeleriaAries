@@ -24,6 +24,7 @@ class InventarioController extends Controller
             'marca' => 'required|max:50',
             'precio' => 'required|min:0',
             'stock' => 'required|min:0|',
+            'categoria' => 'required|max:100',
         ]);
 
         $producto = new inventario();
@@ -33,12 +34,14 @@ class InventarioController extends Controller
         $producto ->marca = $request->marca;
         $producto ->precio = $request->precio;
         $producto ->stock = $request->stock;
+        $producto ->Categoria = $request->categoria;
 
         $producto->save();
 
         return redirect()->route('invSave')->with('success', 'Producto agregado');
 
      }
+
      //Funcion de buscar en la vista de Buscar-stock
      public function search(Request $request,){
         $busqueda = $request->get('busqueda');
@@ -68,6 +71,7 @@ class InventarioController extends Controller
         $producto ->marca = $request->marca;
         $producto ->precio = $request->precio;
         $producto ->stock = $request->stock;
+        $producto ->Categoria = $request->categoria;
 
         $producto->save();
 

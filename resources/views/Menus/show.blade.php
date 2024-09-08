@@ -19,6 +19,10 @@
                     <input type="text" name="marca" class="form-control" value="{{$producto->marca}}">
                 </div>
                 <div class="mb-3">
+                    <label for="categoria" class="form-label">Categoria</label>
+                    <input type="text"  name="categoria" class="form-control " value="{{$producto->Categoria}}">
+                </div>
+                <div class="mb-3">
                     <label for="precio" class="form-label">Precio</label>
                     <input type="number" min="0" step=".01" name="precio" class="form-control" value="{{$producto->precio}}">
                 </div>

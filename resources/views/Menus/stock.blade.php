@@ -9,31 +9,7 @@
                 <div class="mb-3">
                     <label for="id" class="form-label">Busqueda</label>
                     <input type="text" name="busqueda"   class="form-control" autofocus>
-                </div><!--
-                <select name="campo" class="form-select" aria-label="Default select example">
-                    <option selected>Tipo de busqueda</option>
-                    <option value="id">Codigo</option>
-                    <option value="nombre">Nombre</option>
-                    <option value="marca">Marca</option>
-                    <option value="stock">Existencias</option>
-                </select>
-
-                <div class="mb-3">
-                    <label for="nombre" class="form-label">Nombre</label>
-                    <input type="text" name="nombre" class="form-control">
                 </div>
-                <div class="mb-3">
-                    <label for="marca" class="form-label">Marca</label>
-                    <input type="text" name="marca" class="form-control">
-                </div>
-                <div class="mb-3">
-                    <label for="precio" class="form-label">Precio</label>
-                    <input type="number" min="0" value="" step=".01" name="precio" class="form-control">
-                </div>
-                <div class="mb-3">
-                    <label for="stock" class="form-label">Cantidad</label>
-                    <input type="number" min="0" name="stock" class="form-control">
-                </div> -->
                 <button type="submit" class="btn button-body-color ">Buscar</button>
             </form>
         </div>
@@ -50,6 +26,7 @@
                                     <th class="th-sm" scope="col">#</th>
                                     <th class="th-sm" scope="col">Nombre</th>
                                     <th class="th-sm" scope="col">Marca</th>
+                                    <th class="th-sm" scope="col">Categoria</th>
                                     <th class="th-sm" scope="col">Precio</th>
                                     <th class="th-sm" scope="col">Existencias</th>
                                     <th class="th-sm" scope="col">#</th>
@@ -67,6 +44,7 @@
                                         <td>{{$producto->id}}</a></td>
                                         <td>{{$producto->nombre}}</td>
                                         <td>{{$producto->marca}}</td>
+                                        <td>{{$producto->Categoria}}</td>
                                         <td>{{$producto->precio}}</td>
                                         <td>{{$producto->stock}}</td>
                                         <td>

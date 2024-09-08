@@ -38,6 +38,10 @@
                     <input type="text" name="marca" class="form-control">
                 </div>
                 <div class="mb-3">
+                    <label for="categoria" class="form-label">Categoria</label>
+                    <input type="text"  name="categoria" class="form-control">
+                </div>
+                <div class="mb-3">
                     <label for="precio" class="form-label">Precio</label>
                     <input type="number" min="0" value="" step=".01" name="precio" class="form-control">
                 </div>
@@ -45,6 +49,7 @@
                     <label for="stock" class="form-label">Cantidad</label>
                     <input type="number" min="0" name="stock" class="form-control">
                 </div>
+
                 <button type="submit" class="btn button-body-color ">Agregar</button>
             </form>
     </div>
