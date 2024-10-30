@@ -16,9 +16,10 @@ class InventarioController extends Controller
      * edit para mostrar el formulario de edicion
      */
 
-     public function store(Request $request){
+    public function store(Request $request)
+    {
 
-        $request -> validate([
+        $request->validate([
             'id' => 'required|unique:inventarios,id',
             'nombre' => 'required|max:50',
             'marca' => 'required|max:50',
@@ -29,68 +30,72 @@ class InventarioController extends Controller
 
         $producto = new inventario();
 
-        $producto ->id = $request->id;
-        $producto ->nombre = $request->nombre;
-        $producto ->marca = $request->marca;
-        $producto ->precio = $request->precio;
-        $producto ->stock = $request->stock;
-        $producto ->Categoria = $request->categoria;
+        $producto->id = $request->id;
+        $producto->nombre = $request->nombre;
+        $producto->marca = $request->marca;
+        $producto->precio = $request->precio;
+        $producto->stock = $request->stock;
+        $producto->Categoria = $request->categoria;
 
         $producto->save();
 
         return redirect()->route('invSave')->with('success', 'Producto agregado');
+    }
 
-     }
-
-     //Funcion de buscar en la vista de Buscar-stock
-     public function search(Request $request,){
+    //Funcion de buscar en la vista de Buscar-stock
+    public function search(Request $request,)
+    {
         $busqueda = $request->get('busqueda');
-        if($busqueda){
-        $resultados = inventario::where('id' ,'=',$busqueda)
-        ->orWhere('nombre' ,'LIKE',"%$busqueda%")
-        ->orWhere('marca' ,'LIKE',"%$busqueda%")
-        ->orWhere('stock' ,'=',$busqueda)
-        -> get();
-        return view('Menus.stock', compact('resultados'));
-         }
+        if ($busqueda) {
+            $resultados = inventario::where('id', '=', $busqueda)
+                ->orWhere('nombre', 'LIKE', "%$busqueda%")
+                ->orWhere('marca', 'LIKE', "%$busqueda%")
+                ->orWhere('stock', '=', $busqueda)
+                ->get();
+            return view('Menus.stock', compact('resultados'));
+        }
         return view('Menus.stock');
-     }
+    }
 
 
 
-     public function show($id){
+    public function show($id)
+    {
         $producto = inventario::find($id);
 
         return view('Menus.show', ['producto' => $producto]);
-     }
+    }
 
-     public function update(request  $request,$id){
+    public function update(request  $request, $id)
+    {
         $producto = inventario::find($id);
-        $producto ->id = $request->id;
-        $producto ->nombre = $request->nombre;
-        $producto ->marca = $request->marca;
-        $producto ->precio = $request->precio;
-        $producto ->stock = $request->stock;
-        $producto ->Categoria = $request->categoria;
+        $producto->id = $request->id;
+        $producto->nombre = $request->nombre;
+        $producto->marca = $request->marca;
+        $producto->precio = $request->precio;
+        $producto->stock = $request->stock;
+        $producto->Categoria = $request->categoria;
 
         $producto->save();
 
 
         return view('Menus.stock')->with('success', 'Producto modificado');
-     }
+    }
 
-     public function destroy($id){
+    public function destroy($id)
+    {
         $producto = inventario::find($id);
-        $producto -> delete();
+        $producto->delete();
 
 
 
         return view('Menus.stock')->with('success', 'Producto eliminado');
-     }
+    }
 
-     //Funcion para agregar a la tabla de compras desde el buscador de articulos.
+    //Funcion para agregar a la tabla de compras desde el buscador de articulos.
 
-     public function storeTemp(Request $request){
+    public function storeTemp(Request $request)
+    {
         //obtiene todos los datos del request (token e id)
         $dataK = $request->all();
 
@@ -103,10 +108,10 @@ class InventarioController extends Controller
 
         $data = inventario::find($id);
 
-        $producto ->id = $id;
+        $producto->id = $id;
         $producto->precio = $data->precio;
         $producto->nombre = $data->nombre;
-        $producto ->cantidad = 1;
+        $producto->cantidad = 1;
 
         $producto->save();
 
@@ -118,7 +123,6 @@ class InventarioController extends Controller
         }
 
         $total = $subtotal;
-        return redirect()->route('productos')->with('total',$total);
-     }
-
+        return redirect()->route('productos')->with('total', $total);
+    }
 }

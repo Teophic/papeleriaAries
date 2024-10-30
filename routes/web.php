@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\InventarioController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,20 +20,26 @@ Route::get('/', function () {
     return view('welcome');
 });*/
 
-Route::get('/',function(){
+Route::get('/', function () {
     return view('Menus.index');
 })->name('productos');
 
-Route::get('/Agregar',function(){
+Route::get('/Agregar', function () {
     return view('Menus.agregar');
 })->name('invSave');
 
-Route::get('/Stock',function(){
+Route::get('/Stock', function () {
     return view('Menus.stock');
 })->name('invStocks');
 
 
+Route::get('/NewMenu', [CartController::class, 'index'])->name('NewMenu');
 
+Route::post('/NewMenu', [CartController::class, 'addToCart'])->name('addCart');
+
+Route::delete('/NewMenu/pay', [CartController::class, 'closeCart'])->name('closeCart');
+
+Route::get('/NewMenu/remove/{id}', [CartController::class, 'removeFromCart'])->name('removeCart');
 
 
 
