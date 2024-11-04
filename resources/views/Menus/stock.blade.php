@@ -48,13 +48,14 @@
                                         <td>{{$producto->precio}}</td>
                                         <td>{{$producto->stock}}</td>
                                         <td>
-                                            <form action="{{ route('saveT', [$producto->id]) }}" method="POST">
+                                            <form action="{{ route('saveToCart', [$producto->id]) }}" method="POST">
 
                                                 @csrf
                                                 <button class="btn button-color">Carrito</button>
                                             </form>
                                         </td>
-                                        <td><form action="{{ route('delete', [$producto->id]) }}" method="POST">
+                                        <td><form action="{{ route('delete', [$producto->id]) }}" method="POST"
+                                           >
                                                 @method('DELETE')
                                                 @csrf
                                                 <button class="btn button-color">Eliminar</button>

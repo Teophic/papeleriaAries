@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\inventario;
-use App\Models\TemporaryTable;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class InventarioController extends Controller
 {
@@ -84,6 +84,10 @@ class InventarioController extends Controller
 
     public function destroy($id)
     {
+
+
+
+
         $producto = inventario::find($id);
         $producto->delete();
 
@@ -92,37 +96,30 @@ class InventarioController extends Controller
         return view('Menus.stock')->with('success', 'Producto eliminado');
     }
 
-    //Funcion para agregar a la tabla de compras desde el buscador de articulos.
+    //Agregar al carrito desde la busqueda de stock.
 
-    public function storeTemp(Request $request)
+    public function addToCart(Request $request)
     {
-        //obtiene todos los datos del request (token e id)
-        $dataK = $request->all();
-
-        // Obtener la primera clave del array de datos 1:token(first) 2:id(last)
-        $id = array_key_last($dataK);
+        $data = $request->all();
 
 
-        //Se realiza lo mismo que en el controlador ProductController para agregar a la tabla
-        $producto = new TemporaryTable();
+        $product = inventario::find(array_key_last($data));
 
-        $data = inventario::find($id);
+        $cart = session()->get('cart', []);
 
-        $producto->id = $id;
-        $producto->precio = $data->precio;
-        $producto->nombre = $data->nombre;
-        $producto->cantidad = 1;
-
-        $producto->save();
-
-        $productos = TemporaryTable::all();
-
-        $subtotal = 0;
-        foreach ($productos as $producto) {
-            $subtotal += $producto->precio * $producto->cantidad;
+        // Revisa si se encuentra en el carrito y aumenta 1
+        if (isset($cart[array_key_last($data)])) {
+            $cart[array_key_last($data)]['quantity']++;
+        } else {
+            // Si no se encuentra agrega uno inicialmente
+            $cart[array_key_last($data)] = [
+                "name" => $product->nombre,
+                "quantity" => 1,
+                "price" => $product->precio
+            ];
         }
-
-        $total = $subtotal;
-        return redirect()->route('productos')->with('total', $total);
+        session()->put('cart', $cart);
+        Alert::success('Producto agregado', '');
+        return redirect()->back();
     }
 }

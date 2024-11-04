@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\inventario;
 use Illuminate\Http\Request;
 use Symfony\Contracts\Service\Attribute\Required;
+use RealRashid\SweetAlert\Facades\Alert;
+use App\Http\Controllers\SalesController;
 
 class CartController extends Controller
 {
@@ -13,22 +15,29 @@ class CartController extends Controller
     {
         $cart = session()->get('cart');
 
-        return view('Menus2.index', compact('cart'));
+        return view('Menus.index', compact('cart'));
     }
 
     public function addToCart(Request $request)
     {
-        $product = inventario::findOrFail($request->id);
+
+        $product = inventario::find($request->id);
+
+        if (!$product) {
+            Alert::error('Error', 'El producto no existe! Verifique los datos');
+            return redirect()->back();
+        }
+
         $cart = session()->get('cart', []);
 
         // Revisa si se encuentra en el carrito y aumenta 1
         if (isset($cart[$request->id])) {
-            $cart[$request->id]['quantity']++;
+            $cart[$request->id]['quantity'] += $request->cantidad;
         } else {
             // Si no se encuentra agrega uno inicialmente
             $cart[$request->id] = [
                 "name" => $product->nombre,
-                "quantity" => 1,
+                "quantity" => $request->cantidad,
                 "price" => $product->precio
             ];
         }
@@ -39,6 +48,8 @@ class CartController extends Controller
 
     public function removeFromCart($id)
     {
+
+
         // Obtén el carrito de la sesión
         $cart = session()->get('cart');
 
@@ -60,6 +71,11 @@ class CartController extends Controller
         //se obtione el contenido de cart
         $cart = session()->get('cart');
 
+        if (!$cart) {
+            Alert::error('Error', 'El carrito esta vacio');
+            return redirect()->back();
+        }
+
         //por cada id(Id de producto)-data(contenido del producto ej name stock etc)
         foreach ($cart as $id => $data) {
             $quantity = $data['quantity'];
@@ -69,8 +85,10 @@ class CartController extends Controller
         }
 
         //limpia el carrito de la sesion
-        session()->forget('cart');
 
-        return view('Menus2.index');
+        $salesController = new SalesController();
+        $salesController->savesale();
+        session()->forget('cart');
+        return view('Menus.index');
     }
 }

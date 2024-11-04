@@ -22,11 +22,11 @@
                 <div class="collapse navbar-collapse justify-content-end" id="">
                     <ul class=" navbar-nav  nav-fill">
                         <li class="nav-item"><a class="nav-link  text-color" href="{{URL::to('Agregar')}}">Agregar Producto</a></li>
-                        <li class="nav-item"><a class="nav-link text-color" href="{{URL::to('Stock')}}">Buscar</a></li> 
+                        <li class="nav-item"><a class="nav-link text-color" href="{{URL::to('Stock')}}">Buscar</a></li>
                     </ul>
             </div>
             </div>
-            
+
         </nav>
     </header>
     @include('sweetalert::alert')

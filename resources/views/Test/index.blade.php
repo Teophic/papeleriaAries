@@ -19,10 +19,7 @@
 
 
         </form>
-        <!--<form action="{{ route('infoPago') }}" method="GET" class="mt-3">
-            @csrf
-            <button type="submit" class="btn button-body-color">Info costo total</button>
-        </form>-->
+
 
         <form action="{{ route('closeCart') }}" method="POST" class="mt-1">
             @method("DELETE")

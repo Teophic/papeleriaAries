@@ -20,9 +20,7 @@ Route::get('/', function () {
     return view('welcome');
 });*/
 
-Route::get('/', function () {
-    return view('Menus.index');
-})->name('productos');
+
 
 Route::get('/Agregar', function () {
     return view('Menus.agregar');
@@ -33,13 +31,13 @@ Route::get('/Stock', function () {
 })->name('invStocks');
 
 
-Route::get('/NewMenu', [CartController::class, 'index'])->name('NewMenu');
+Route::get('/', [CartController::class, 'index'])->name('Menu');
 
-Route::post('/NewMenu', [CartController::class, 'addToCart'])->name('addCart');
+Route::post('/', [CartController::class, 'addToCart'])->name('addCart');
 
-Route::delete('/NewMenu/pay', [CartController::class, 'closeCart'])->name('closeCart');
+Route::delete('/', [CartController::class, 'closeCart'])->name('closeCart');
 
-Route::get('/NewMenu/remove/{id}', [CartController::class, 'removeFromCart'])->name('removeCart');
+Route::get('/Home/remove/{id}', [CartController::class, 'removeFromCart'])->name('removeCart');
 
 
 
@@ -53,18 +51,7 @@ Route::delete('/Stock/{id}', [InventarioController::class, 'destroy'])->name('de
 
 Route::get('/Stock', [InventarioController::class, 'search'])->name('search');
 
-Route::post('/Stock/temp', [InventarioController::class, 'storeTemp'])->name('saveT');
-
-
-Route::post('/', [ProductController::class, 'addProduct'])->name('addProduct');
-
-Route::get('/', [ProductController::class, 'showProducts'])->name('productos');
-
-Route::get('//info', [ProductController::class, 'infoPago'])->name('infoPago');
-
-Route::delete('/', [ProductController::class, 'removeStock'])->name('removeProduct');
-
-Route::delete('//{id}', [ProductController::class, 'destroy'])->name('deleteProduct');
+Route::post('/Stock/temp', [InventarioController::class, 'addToCart'])->name('saveToCart');
 
 
 
