@@ -16,6 +16,11 @@ class InventarioController extends Controller
      * edit para mostrar el formulario de edicion
      */
 
+    public function index()
+    {
+        return view('Menus.agregar');
+    }
+
     public function store(Request $request)
     {
 

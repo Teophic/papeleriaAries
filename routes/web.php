@@ -2,8 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\InventarioController;
-use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,9 +22,10 @@ Route::get('/', function () {
 
 
 
-Route::get('/Agregar', function () {
-    return view('Menus.agregar');
-})->name('invSave');
+// Route::get('/Agregar', function () {
+//     return view('Menus.agregar');
+// })->name('invSave');
+Route::get('/Agregar', [InventarioController::class, 'index'])->name('invSave');
 
 Route::get('/Stock', function () {
     return view('Menus.stock');
@@ -54,6 +55,7 @@ Route::get('/Stock', [InventarioController::class, 'search'])->name('search');
 Route::post('/Stock/temp', [InventarioController::class, 'addToCart'])->name('saveToCart');
 
 
+Route::get('/Dashboard', [DashboardController::class, 'index'])->name('Dashboard');
 
 //Route::get('/test','EjemploController@index');
 
