@@ -19,7 +19,7 @@
                         <img src="{{asset('img\logo.png') }}" class="" alt="Logo" style="width:100px;height:100px">
                     </a>
 
-                <div class="collapse navbar-collapse justify-content-end" id="">
+                <div class=" justify-content-end" id="">
                     <ul class=" navbar-nav  nav-fill">
                         <li class="nav-item"><a class="nav-link  text-color" href="{{URL::to('Agregar')}}">Agregar Producto</a></li>
                         <li class="nav-item"><a class="nav-link text-color" href="{{URL::to('Stock')}}">Buscar</a></li>
