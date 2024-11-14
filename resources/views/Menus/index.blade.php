@@ -22,8 +22,8 @@
         <form action="{{ route('closeCart') }}" method="POST" class="mt-1">
             @method("DELETE")
             @csrf
-            <label for="pago" class="form-label mt-3">Pago con: </label>
-            <input type="number" name="pago" id="pago" min="0" class="form-control">
+            {{-- <label for="pago" class="form-label mt-3">Pago con: </label>
+            <input type="number" name="pago" id="pago" min="0" class="form-control"> --}}
             <button type="submit" class="btn button-body-color mt-2">Pagar</button>
         </form>
 

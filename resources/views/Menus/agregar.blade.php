@@ -50,6 +50,8 @@
                     <input type="number" min="0" name="stock" class="form-control">
                 </div>
 
+                <button type="submit" disabled style="display: none"></button>
+
                 <button type="submit" class="btn button-body-color ">Agregar</button>
             </form>
     </div>
