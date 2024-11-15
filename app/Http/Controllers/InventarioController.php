@@ -62,6 +62,14 @@ class InventarioController extends Controller
         return view('Menus.stock');
     }
 
+    public function noStock()
+    {
+
+        $resultados = inventario::Where('stock', '=', 0)
+            ->get();
+        return view('Menus.stock', compact('resultados'));
+    }
+
 
 
     public function show($id)

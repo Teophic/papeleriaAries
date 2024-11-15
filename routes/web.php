@@ -52,6 +52,8 @@ Route::delete('/Stock/{id}', [InventarioController::class, 'destroy'])->name('de
 
 Route::get('/Stock', [InventarioController::class, 'search'])->name('search');
 
+Route::get('/WithoutStock', [InventarioController::class, 'noStock'])->name('noStock');
+
 Route::post('/Stock/temp', [InventarioController::class, 'addToCart'])->name('saveToCart');
 
 

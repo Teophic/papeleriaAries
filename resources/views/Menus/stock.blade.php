@@ -7,10 +7,17 @@
                 @csrf
 
                 <div class="mb-3">
-                    <label for="id" class="form-label">Busqueda</label>
-                    <input type="text" name="busqueda"   class="form-control" autofocus>
+                    <label for="id" class="form-label">Código</label>
+                    <input type="number" name="busqueda"   class="form-control" autofocus>
                 </div>
                 <button type="submit" class="btn button-body-color ">Buscar</button>
+            </form>
+
+            <form action="{{ route('noStock') }}" method="GET">
+                @csrf
+                <div class="mt-3">
+                    <button type="submit" class="btn button-body-color ">Productos Agotados</button>
+                </div>
             </form>
         </div>
         <div class="table-responsive p-4 w-75 align-self-center" >
