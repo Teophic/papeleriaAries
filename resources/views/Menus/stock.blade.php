@@ -8,7 +8,7 @@
 
                 <div class="mb-3">
                     <label for="id" class="form-label">Código</label>
-                    <input type="number" name="busqueda"   class="form-control" autofocus>
+                    <input type="text" name="busqueda"   class="form-control" autofocus>
                 </div>
                 <button type="submit" class="btn button-body-color ">Buscar</button>
             </form>
